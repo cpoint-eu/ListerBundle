@@ -70,8 +70,9 @@ class RouterView
     public function getSortRoute(string $field, string $direction): string
     {
         $sortName = $this->requestHandler->getName('sort');
+        $sortDirection = $this->requestHandler->getName('direction');
 
-        return $this->generate([$sortName => [$field => $direction]]);
+        return $this->generate([$sortName => $field, $sortDirection => $direction]);
     }
 
     /**

@@ -120,26 +120,21 @@ class RequestHandler
      */
     private function handleListRequest(ListMapper $listMapper): void
     {
-        $sort = $this->getValue('sort') ?? [];
+        $sort = $this->getValue('sort') ?? null;
+        $direction = $this->getValue('direction') ?? null;
 
         if ($sort) {
             $fieldsSet = null;
+            if (!in_array($direction, [ListField::SORT_DESC, ListField::SORT_ASC], true) || !$listMapper->has($sort)) {
+                return;
+            }
 
-            foreach ($sort as $id => $direction) {
-                $direction = strtoupper($direction);
+            $field = $listMapper->get($sort);
+            $field->setOption(ListField::OPTION_SORT_VALUE, $direction);
+            $field->setOption(ListField::OPTION_LAZY, false);
 
-                if (!in_array($direction, [ListField::SORT_DESC, ListField::SORT_ASC], true) || !$listMapper->has($id)) {
-                    continue;
-                }
-
-                $field = $listMapper->get($id);
-                $field->setOption(ListField::OPTION_SORT_VALUE, $direction);
-                $field->setOption(ListField::OPTION_LAZY, false);
-
-                if (false === $this->configuration->isMultiColumnSortable()) {
-                    $fieldsSet = $field->getId();
-                    break;
-                }
+            if (false === $this->configuration->isMultiColumnSortable()) {
+                $fieldsSet = $field->getId();
             }
 
             if (null !== $fieldsSet) {

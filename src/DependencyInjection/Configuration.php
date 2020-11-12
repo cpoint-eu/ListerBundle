@@ -66,6 +66,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('page')->defaultValue('page')->cannotBeEmpty()->end()
                                 ->scalarNode('length')->defaultValue('length')->cannotBeEmpty()->end()
                                 ->scalarNode('sort')->defaultValue('sort')->cannotBeEmpty()->end()
+                                ->scalarNode('direction')->defaultValue('direction')->cannotBeEmpty()->end()
                                 ->scalarNode('filter')->defaultValue(null)->end()
                             ->end()
                         ->end()
