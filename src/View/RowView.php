@@ -43,7 +43,7 @@ class RowView implements ViewInterface
     private $fields = [];
 
     /**
-     * @var int|null
+     * @var string|null
      */
     private $id;
 
@@ -76,9 +76,9 @@ class RowView implements ViewInterface
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -119,7 +119,7 @@ class RowView implements ViewInterface
         $this->value = [];
 
         if (self::TYPE_BODY === $type) {
-            $this->id = (int) $data[ListQueryBuilder::IDENTIFIER_ALIAS];
+            $this->id = (string) $data[ListQueryBuilder::IDENTIFIER_ALIAS];
             $data = $this->valueAccessor->normalizeData($data, $this->queryBuilder);
         }
 

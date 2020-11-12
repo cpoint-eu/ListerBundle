@@ -1,5 +1,5 @@
 {
-  "name": "povs/lister-bundle",
+  "name": "cpoint-eu/lister-bundle",
   "type": "symfony-bundle",
   "description": "Lister bundle for Symfony to simplify common data listing functions (pagination, sorting, filtering, exporting, etc.)",
   "keywords": ["lister", "list", "symfony", "bundle", "doctrine"],
